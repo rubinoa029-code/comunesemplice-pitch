@@ -1,0 +1,469 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ComuneSemplice - Pitch Deck</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #2563eb;
+            --secondary: #10b981;
+            --dark: #0f172a;
+            --light: #f8fafc;
+            --gray: #64748b;
+        }
+        body {
+            font-family: 'Inter', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #e2e8f0;
+            color: var(--dark);
+            overflow-x: hidden;
+        }
+        /* Configurazione Slide 16:9 */
+        .slide-container {
+            width: 100vw;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            page-break-after: always;
+        }
+        .slide {
+            width: 1280px;
+            height: 720px;
+            background: white;
+            position: relative;
+            box-shadow: 0 20px 25px -5px rgba(0,0,0,0.1);
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            animation: fadeIn 1s ease-in-out;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        /* Copertina */
+        .cover {
+            background: linear-gradient(135deg, var(--dark) 0%, #1e3a8a 100%);
+            color: white;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 80px;
+        }
+        .cover .date {
+            color: var(--secondary);
+            font-weight: 600;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 20px;
+        }
+        .cover h1 {
+            font-size: 80px;
+            font-weight: 800;
+            margin: 0 0 20px 0;
+            line-height: 1.1;
+        }
+        .cover p {
+            font-size: 28px;
+            color: #93c5fd;
+            max-width: 800px;
+        }
+        /* Layout Interno */
+        .content { padding: 60px 80px; flex-grow: 1; }
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 40px;
+            border-bottom: 2px solid #e2e8f0;
+            padding-bottom: 20px;
+        }
+        h2 { font-size: 42px; margin: 0; color: var(--dark); }
+        .tag {
+            background: rgba(37, 99, 235, 0.1);
+            color: var(--primary);
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-weight: 600;
+            font-size: 14px;
+        }
+        /* Griglie */
+        .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; }
+        .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; }
+        
+        /* Grafiche CSS (Mockup App) */
+        .mockup-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100%;
+        }
+        .phone-mockup {
+            width: 280px;
+            height: 560px;
+            background: white;
+            border: 12px solid var(--dark);
+            border-radius: 40px;
+            box-shadow: 0 25px 50px -12px rgba(0,0,0,0.25);
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+        .phone-notch {
+            position: absolute;
+            top: 0; left: 50%;
+            transform: translateX(-50%);
+            width: 120px; height: 25px;
+            background: var(--dark);
+            border-bottom-left-radius: 15px;
+            border-bottom-right-radius: 15px;
+            z-index: 10;
+        }
+        .app-header {
+            background: var(--primary);
+            color: white;
+            padding: 40px 20px 20px;
+            font-weight: 600;
+        }
+        /* Widget Notifiche */
+        .widget {
+            background: #f1f5f9;
+            margin: 15px;
+            border-radius: 12px;
+            padding: 15px;
+            border-left: 4px solid var(--primary);
+        }
+        .widget.alert { border-left-color: #ef4444; background: #fef2f2; }
+        .widget.success { border-left-color: var(--secondary); background: #f0fdf4; }
+        
+        /* Chat UI */
+        .chat-bubble {
+            background: #e2e8f0;
+            padding: 12px;
+            border-radius: 15px;
+            margin: 10px 15px;
+            font-size: 14px;
+            max-width: 80%;
+        }
+        .chat-bubble.user {
+            background: var(--primary);
+            color: white;
+            align-self: flex-end;
+            margin-left: auto;
+        }
+        
+        /* Carte e Testi */
+        .card {
+            background: white;
+            border: 1px solid #cbd5e1;
+            border-radius: 16px;
+            padding: 30px;
+            box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05);
+        }
+        .card-icon {
+            font-size: 40px;
+            margin-bottom: 20px;
+        }
+        .text-lg { font-size: 20px; line-height: 1.6; color: var(--gray); }
+        .footer {
+            padding: 20px 80px;
+            display: flex;
+            justify-content: space-between;
+            color: var(--gray);
+            font-size: 14px;
+            border-top: 1px solid #e2e8f0;
+        }
+        
+        /* Modello Business */
+        .pricing-tier {
+            text-align: center;
+            padding: 40px;
+            border-radius: 16px;
+            border: 2px solid #e2e8f0;
+        }
+        .pricing-tier.pro {
+            border-color: var(--primary);
+            background: rgba(37, 99, 235, 0.03);
+            position: relative;
+        }
+        .pricing-price { font-size: 48px; font-weight: 800; color: var(--dark); margin: 20px 0; }
+        
+        @media print {
+            .slide-container { height: 100vh; page-break-after: always; }
+            .slide { box-shadow: none; border: none; }
+            body { background: white; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- SLIDE 1: COPERTINA -->
+    <div class="slide-container">
+        <div class="slide cover">
+            <div class="date">28 Ottobre 2025</div>
+            <h1>ComuneSemplice</h1>
+            <p>Il primo ecosistema civico iper-localizzato che azzera la burocrazia e le multe per 40 milioni di cittadini.</p>
+            <div style="margin-top: 60px; display: flex; gap: 20px;">
+                <div style="background: rgba(255,255,255,0.1); padding: 15px 30px; border-radius: 8px;">🚀 Seed Round Pitch</div>
+                <div style="background: rgba(255,255,255,0.1); padding: 15px 30px; border-radius: 8px;">📍 Go-to-Market: Italia</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- SLIDE 2: IL PROBLEMA -->
+    <div class="slide-container">
+        <div class="slide">
+            <div class="content">
+                <div class="header">
+                    <h2>Il Problema (Market Pain)</h2>
+                    <span class="tag">Analisi di Mercato</span>
+                </div>
+                <div class="grid-2">
+                    <div>
+                        <p class="text-lg">Ogni anno i cittadini italiani bruciano tempo e denaro a causa di una Pubblica Amministrazione iper-frammentata su <strong>7.900+ comuni</strong>.</p>
+                        <div style="margin-top: 30px; display: flex; flex-direction: column; gap: 20px;">
+                            <div class="card" style="border-left: 6px solid #ef4444;">
+                                <h3 style="margin:0 0 10px 0;">🔴 1.5 Mld€ in Multe Evitabili</h3>
+                                <p style="margin:0; font-size: 16px; color: var(--gray);">Per spazzamento strade (es. Amiat/Amsa) e violazioni ZTL/Smog per mancata comunicazione preventiva.</p>
+                            </div>
+                            <div class="card" style="border-left: 6px solid #f59e0b;">
+                                <h3 style="margin:0 0 10px 0;">🟠 Bonus Locali Ignorati</h3>
+                                <p style="margin:0; font-size: 16px; color: var(--gray);">Fondi per affitto, asili e sport non riscossi a causa di siti web obsoleti e bandi invisibili.</p>
+                            </div>
+                            <div class="card" style="border-left: 6px solid #3b82f6;">
+                                <h3 style="margin:0 0 10px 0;">🔵 Scadenze Caotiche</h3>
+                                <p style="margin:0; font-size: 16px; color: var(--gray);">TARI, IMU, iscrizioni scolastiche: ogni adempimento ha calendari e portali separati.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mockup-container">
+                        <div style="text-align: center;">
+                            <img src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='80' font-size='80'>🌪️</text></svg>" alt="Caos" style="width:150px; opacity: 0.5;">
+                            <h3 style="color: var(--gray); margin-top: 20px;">L'attuale esperienza del cittadino</h3>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="footer"><span>ComuneSemplice</span><span>2 / 8</span></div>
+        </div>
+    </div>
+
+    <!-- SLIDE 3: FUNZIONALITÀ 1 - MOBILITÀ -->
+    <div class="slide-container">
+        <div class="slide">
+            <div class="content">
+                <div class="header">
+                    <h2>Core 1: Radar Mobilità & Anti-Multe</h2>
+                    <span class="tag">Prevenzione e Risparmio</span>
+                </div>
+                <div class="grid-2">
+                    <div class="mockup-container">
+                        <div class="phone-mockup">
+                            <div class="phone-notch"></div>
+                            <div class="app-header">🚗 Mobilità</div>
+                            <div class="widget alert">
+                                <strong style="color: #991b1b;">⚠️ Attenzione Spazzamento</strong>
+                                <p style="font-size: 12px; margin: 5px 0 0;">Domani ore 08:00 lavaggio in Via Roma. Sposta la tua Fiat Panda.</p>
+                            </div>
+                            <div class="widget success">
+                                <strong style="color: #166534;">🟢 Semaforo Smog (ARPA)</strong>
+                                <p style="font-size: 12px; margin: 5px 0 0;">Livello verde. La tua Euro 5 Diesel può circolare regolarmente oggi.</p>
+                            </div>
+                            <div class="widget">
+                                <strong>🅿️ ZTL Attiva</strong>
+                                <p style="font-size: 12px; margin: 5px 0 0;">Ingresso vietato fino alle 10:30.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <p class="text-lg">La <strong>Killer Feature</strong> che garantisce un tasso di apertura giornaliero dell'app (DAU elevato).</p>
+                        <ul class="text-lg" style="line-height: 2;">
+                            <li><strong>Integrazione Dati Locali:</strong> Scraping intelligente e API delle municipalizzate (rifiuti, pulizia) basato sul CAP.</li>
+                            <li><strong>Notifiche Push Geofenced:</strong> L'avviso arriva la sera prima in base a dove l'utente ha parcheggiato.</li>
+                            <li><strong>Tracciamento Smog:</strong> Connessione diretta con i bollettini ambientali regionali per blocchi del traffico.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="footer"><span>ComuneSemplice</span><span>3 / 8</span></div>
+        </div>
+    </div>
+
+    <!-- SLIDE 4: FUNZIONALITÀ 2 - BUROCRAZIA AI -->
+    <div class="slide-container">
+        <div class="slide">
+            <div class="content">
+                <div class="header">
+                    <h2>Core 2: Assistente Burocratico IA</h2>
+                    <span class="tag">AI Generativa</span>
+                </div>
+                <div class="grid-2">
+                    <div>
+                        <p class="text-lg">Diciamo addio ai PDF di 20 pagine. Un Agente IA addestrato esclusivamente sulle normative del singolo comune risponde e guida il cittadino.</p>
+                        <div class="card" style="margin-top: 30px; background: #f8fafc;">
+                            <h4 style="margin: 0 0 15px 0;">Flusso Operativo:</h4>
+                            <ol class="text-lg" style="margin:0; padding-left: 20px;">
+                                <li>L'utente esprime il bisogno in linguaggio naturale.</li>
+                                <li>L'IA consulta il database del Comune specifico.</li>
+                                <li>Fornisce la lista esatta dei documenti.</li>
+                                <li>Apre il portale SPID pre-compilato.</li>
+                            </ol>
+                        </div>
+                    </div>
+                    <div class="mockup-container">
+                        <div class="phone-mockup">
+                            <div class="phone-notch"></div>
+                            <div class="app-header" style="background: var(--dark);">💬 Assistente Civico</div>
+                            <div style="flex-grow:1; display:flex; flex-direction:column; background:#f8fafc;">
+                                <div class="chat-bubble user">Come richiedo il pass residenti per la ZTL?</div>
+                                <div class="chat-bubble">Ti servono 2 cose:<br>1. Libretto auto<br>2. Copia contratto affitto.<br><br>👉 <a href="#" style="color:var(--primary);">Clicca qui</a> per aprire il modulo ufficiale del tuo Comune.</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="footer"><span>ComuneSemplice</span><span>4 / 8</span></div>
+        </div>
+    </div>
+
+    <!-- SLIDE 5: FUNZIONALITÀ 3 - BONUS E SCADENZE -->
+    <div class="slide-container">
+        <div class="slide">
+            <div class="content">
+                <div class="header">
+                    <h2>Core 3: Radar Bonus & Scadenziario</h2>
+                    <span class="tag">Finanza Personale</span>
+                </div>
+                <div class="grid-2">
+                    <div class="card">
+                        <div class="card-icon">🎯</div>
+                        <h3>Radar Bandi e Agevolazioni</h3>
+                        <p class="text-lg">Un algoritmo di profilazione (età, figli, ISEE) incrocia i bandi locali/regionali appena pubblicati.</p>
+                        <div class="widget" style="background: rgba(16, 185, 129, 0.1); border-left-color: var(--secondary);">
+                            <strong>Nuovo Bando Trovato!</strong>
+                            <p style="margin:5px 0 0;">Voucher Sportivo 200€ - Scade tra 5 gg</p>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="card-icon">📅</div>
+                        <h3>Scadenziario Fiscale Locale</h3>
+                        <p class="text-lg">L'unico calendario unificato per le tasse che variano da comune a comune.</p>
+                        <ul style="color: var(--gray); line-height: 1.8;">
+                            <li>TARI (Tassa Rifiuti) e scadenze rate.</li>
+                            <li>IMU e aliquote deliberate.</li>
+                            <li>Rinnovo mense scolastiche.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="footer"><span>ComuneSemplice</span><span>5 / 8</span></div>
+        </div>
+    </div>
+
+    <!-- SLIDE 6: TECNOLOGIA E DATI -->
+    <div class="slide-container">
+        <div class="slide">
+            <div class="content">
+                <div class="header">
+                    <h2>Come aggreghiamo i dati? (Il Vantaggio Competitivo)</h2>
+                    <span class="tag">Architettura Tech</span>
+                </div>
+                <p class="text-lg">Integrare 7.900 comuni non richiede 7.900 accordi commerciali. L'architettura è scalabile fin dal Day-1.</p>
+                <div class="grid-3" style="margin-top: 40px;">
+                    <div class="card">
+                        <h3 style="color: var(--primary);">1. AI Web Scraping</h3>
+                        <p>Agenti autonomi monitorano h24 gli albi pretori, le news e le delibere dei siti web comunali estraendo dati strutturati (es. date, importi bandi).</p>
+                    </div>
+                    <div class="card">
+                        <h3 style="color: var(--secondary);">2. Open Data & API</h3>
+                        <p>Integrazione nativa con PagoPA, banche dati ARPA (ambiente) e dataset pubblici governativi nazionali e regionali.</p>
+                    </div>
+                    <div class="card">
+                        <h3 style="color: #f59e0b;">3. Crowdsourcing</h3>
+                        <p>Gamification locale: gli utenti segnalano variazioni repentine (es. cartelli provvisori di divieto sosta) guadagnando badge e premi.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="footer"><span>ComuneSemplice</span><span>6 / 8</span></div>
+        </div>
+    </div>
+
+    <!-- SLIDE 7: BUSINESS MODEL -->
+    <div class="slide-container">
+        <div class="slide">
+            <div class="content">
+                <div class="header">
+                    <h2>Modello di Business</h2>
+                    <span class="tag">Monetizzazione B2C & B2B</span>
+                </div>
+                <div class="grid-2">
+                    <div class="pricing-tier">
+                        <h3>Piano Freemium</h3>
+                        <div class="pricing-price">0€ <span style="font-size:20px; color:var(--gray);">/mese</span></div>
+                        <ul style="text-align: left; margin: 0 auto; display: inline-block; color:var(--gray);">
+                            <li>1 Auto registrata</li>
+                            <li>1 Comune (CAP)</li>
+                            <li>Alert pulizia strade standard</li>
+                        </ul>
+                    </div>
+                    <div class="pricing-tier pro">
+                        <div style="position:absolute; top:-15px; left:50%; transform:translateX(-50%); background:var(--primary); color:white; padding:5px 15px; border-radius:20px; font-size:12px; font-weight:bold;">MOST POPULAR</div>
+                        <h3 style="color: var(--primary);">Piano PRO</h3>
+                        <div class="pricing-price">1,99€ <span style="font-size:20px; color:var(--gray);">/mese</span></div>
+                        <ul style="text-align: left; margin: 0 auto; display: inline-block; color:var(--gray);">
+                            <li>Multi-veicolo e Multi-immobile</li>
+                            <li>Radar Bandi Avanzato</li>
+                            <li>Archivio documenti illimitato</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="card" style="margin-top: 30px; text-align: center; background: var(--dark); color: white;">
+                    <h3 style="margin-top:0;">🌟 Upsell B2B (Marketplace)</h3>
+                    <p style="margin:0; font-size: 16px; color: #94a3b8;">Lead generation qualificata: inoltro pratiche complesse a CAF, patronati e commercialisti locali (Fee su transazione).</p>
+                </div>
+            </div>
+            <div class="footer"><span>ComuneSemplice</span><span>7 / 8</span></div>
+        </div>
+    </div>
+
+    <!-- SLIDE 8: ROADMAP -->
+    <div class="slide-container">
+        <div class="slide">
+            <div class="content">
+                <div class="header">
+                    <h2>Roadmap & Go-to-Market</h2>
+                    <span class="tag">Next Steps</span>
+                </div>
+                <div class="grid-2">
+                    <div>
+                        <div style="margin-bottom: 25px;">
+                            <h3 style="color: var(--primary); margin: 0 0 5px 0;">Fase 1: City Pilot (Q1)</h3>
+                            <p style="margin: 0; color: var(--gray);">Lancio su una singola area metropolitana test per ottimizzare il radar multe (acquisizione utenti virale tramite gruppi Facebook/studenti).</p>
+                        </div>
+                        <div style="margin-bottom: 25px;">
+                            <h3 style="color: var(--secondary); margin: 0 0 5px 0;">Fase 2: Espansione Capoluoghi (Q2-Q3)</h3>
+                            <p style="margin: 0; color: var(--gray);">Estensione ai primi 20 capoluoghi italiani attivando l'Agent IA per i bandi comunali e regionali.</p>
+                        </div>
+                        <div style="margin-bottom: 25px;">
+                            <h3 style="color: #f59e0b; margin: 0 0 5px 0;">Fase 3: B2B Marketplace (Q4)</h3>
+                            <p style="margin: 0; color: var(--gray);">Apertura della piattaforma ai professionisti (CAF/Commercialisti) per la monetizzazione sui servizi a valore aggiunto.</p>
+                        </div>
+                    </div>
+                    <div style="display: flex; flex-direction: column; justify-content: center; align-items: center; background: #f8fafc; border-radius: 16px; padding: 40px; border: 2px dashed #cbd5e1;">
+                        <h3 style="font-size: 28px; margin-bottom: 10px;">Cerchiamo Partner</h3>
+                        <p style="text-align: center; color: var(--gray); margin-bottom: 30px;">Siamo pronti per lo sviluppo dell'MVP e il lancio della prima città pilota.</p>
+                        <a href="#" style="background: var(--primary); color: white; text-decoration: none; padding: 15px 30px; border-radius: 8px; font-weight: 600; font-size: 18px;">Contatta i Founder</a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer"><span>ComuneSemplice</span><span>8 / 8</span></div>
+        </div>
+    </div>
+
+</body>
+</html>
